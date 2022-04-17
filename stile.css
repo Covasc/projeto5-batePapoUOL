@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background: #E5E5E5;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    padding: 22px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    background: white;
+}
+.top img {
+    width: 75px;
+    height: 53px;   
+}
+.top ion-icon {
+    font-size: 50px;
+}
+.bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    padding: 17px;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+}
+.bottom textarea {
+    border-style: none;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    overflow: auto;
+    resize: none;
+}
+.bottom ion-icon {
+    font-size: 35px;
+}
+.subject {
+    margin: 100px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.message {
+    padding: 15px 9px;
+    margin: 0 0 5px 0;
+}
+.entering {
+    background: #DCDCDC;
+}
+.common {
+    background: white;
+}
+.private {
+    background: #FFDEDE;
+}
+.time {
+    color: #AAAAAA;;
+}
+.name {
+    font-weight: 700;
+}
