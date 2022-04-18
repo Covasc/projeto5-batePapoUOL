@@ -10,14 +10,11 @@ function sendName () {
     };
 }
 function failed (){
-    console.log("falhou");
     userName = prompt("Ops! Nome já utilizado. Informe um novo nome:");
     sendName();
-    console.log(avatar);
     logIn ();
 }
 function loggedIn () {
-    console.log("deu certo");
     setInterval(stayLoggedIn, 4000);
     setInterval(getMessages, 3000);
 }
@@ -27,12 +24,10 @@ requisicao.then(loggedIn);
 requisicao.catch(failed);
 }
 function stayLoggedIn () {
-    console.log("logando")
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status' , avatar);
 }
 function loadMessages (response) {
     messagesList = response.data;
-    console.log(messagesList);
     mountMessages();
 }
 function getMessages () {
@@ -40,43 +35,69 @@ function getMessages () {
     requisicao.then(loadMessages);
 }
 function mountMessages () {
+    //&& messagesList[i].to==userName){
     messagesListDisplay.innerHTML ="";
     for (let i=0;i<messagesList.length;i++){
-        if (i == (messagesList.length - 1)) {
+        if (messagesList[i].type=="private_message") {
+            if (messagesList[i].to==userName) {
+                if (i == (messagesList.length - 1)) {
+                    messagesListDisplay.innerHTML += `
+                    <div class="messageBody ${messagesList[i].type} last">
+                        <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
+                    </div>`;    
+                } else {
+                messagesListDisplay.innerHTML += `
+                <div class="messageBody ${messagesList[i].type}">
+                    <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
+                </div>`;
+                }
+    
+            }
+        } else { 
+            if (i == (messagesList.length - 1)) {
+                messagesListDisplay.innerHTML += `
+                <div class="messageBody ${messagesList[i].type} last">
+                    <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
+                </div>`;    
+            } else {
             messagesListDisplay.innerHTML += `
-            <div class="messageBody ${messagesList[i].type} last">
+            <div class="messageBody ${messagesList[i].type}">
                 <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
-            </div>`;    
-        } else {
-        messagesListDisplay.innerHTML += `
-        <div class="messageBody ${messagesList[i].type}">
-            <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
-        </div>`;
+            </div>`;
+            }
         }
     }
     document.querySelector(".last").scrollIntoView();
 }  
 function mountMessage () {
     let userInput = document.querySelector("textarea").value;
-    let message = {
-        from: userName,
-        to: "Todos",
-        text: userInput,
-        type: "message"
-    };
-    console.log(message);
-    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', message);
-    requisicao.then(foi);
-    requisicao.catch(numfoi);
-    getMessages();
-    document.querySelector("textarea").value = "";
+    if (userInput==""){
+        document.querySelector("textarea").value = "Escreva aqui...";
+    } else { 
+        let message = {
+            from: userName,
+            to: "Todos",
+            text: userInput,
+            type: "message"
+        };
+        const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', message);
+        requisicao.then(foi);
+        requisicao.catch(numfoi);
+        getMessages();
+        document.querySelector("textarea").value = "Escreva aqui...";
+    }
+    document.querySelector("textarea").classList.remove("selected");
 }
 function foi () {
-    console.log("mandou a mensagem")
 }
 function numfoi () {
-    console.log("nao mandou a mensagem")
+    window.location.reload()
 }
-function clearContent () {
+function clearContent (object) {
+    if (object.classList.contains("selected")){
+
+    } else {
     document.querySelector("textarea").value = "";
+    object.classList.add("selected")
+    }
 }
