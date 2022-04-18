@@ -43,6 +43,32 @@ function mountMessages () {
                 if (i == (messagesList.length - 1)) {
                     messagesListDisplay.innerHTML += `
                     <div class="messageBody ${messagesList[i].type} last">
+                        <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span>reservadamente para <span class="name">Você </span><span>${messagesList[i].text}</span></p>
+                    </div>`;    
+                } else {
+                messagesListDisplay.innerHTML += `
+                <div class="messageBody ${messagesList[i].type}">
+                <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span>reservadamente para <span class="name">Você </span><span>${messagesList[i].text}</span></p>
+                </div>`;
+                }    
+            }
+        } else { 
+            if (messagesList[i].type=="message"){
+                if (i == (messagesList.length - 1)) {
+                    messagesListDisplay.innerHTML += `
+                    <div class="messageBody ${messagesList[i].type} last">
+                        <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span>para <span class="name">Todos </span><span>${messagesList[i].text}</span></p>
+                    </div>`;    
+                } else {
+                messagesListDisplay.innerHTML += `
+                <div class="messageBody ${messagesList[i].type}">
+                <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span>para <span class="name">Todos </span><span>${messagesList[i].text}</span></p>
+                </div>`;
+                }    
+            } else {
+                if (i == (messagesList.length - 1)) {
+                    messagesListDisplay.innerHTML += `
+                    <div class="messageBody ${messagesList[i].type} last">
                         <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
                     </div>`;    
                 } else {
@@ -51,19 +77,6 @@ function mountMessages () {
                     <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
                 </div>`;
                 }
-    
-            }
-        } else { 
-            if (i == (messagesList.length - 1)) {
-                messagesListDisplay.innerHTML += `
-                <div class="messageBody ${messagesList[i].type} last">
-                    <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
-                </div>`;    
-            } else {
-            messagesListDisplay.innerHTML += `
-            <div class="messageBody ${messagesList[i].type}">
-                <p><span class="time">(${messagesList[i].time}) </span><span class="name">${messagesList[i].from} </span><span>${messagesList[i].text}</span></p>
-            </div>`;
             }
         }
     }
