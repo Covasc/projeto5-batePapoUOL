@@ -35,11 +35,11 @@ function getMessages () {
     requisicao.then(loadMessages);
 }
 function mountMessages () {
-    //&& messagesList[i].to==userName){
+    //o lele usou um querySelector("classe tipo :last-child")
     messagesListDisplay.innerHTML ="";
     for (let i=0;i<messagesList.length;i++){
         if (messagesList[i].type=="private_message") {
-            if (messagesList[i].to==userName) {
+            if (messagesList[i].to==userName || messagesList[i].from==userName) {
                 if (i == (messagesList.length - 1)) {
                     messagesListDisplay.innerHTML += `
                     <div class="messageBody ${messagesList[i].type} last">
