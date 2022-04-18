@@ -25,6 +25,7 @@ requisicao.catch(failed);
 }
 function stayLoggedIn () {
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status' , avatar);
+    requisicao.catch(numfoi);
 }
 function loadMessages (response) {
     messagesList = response.data;

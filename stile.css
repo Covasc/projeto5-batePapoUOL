@@ -68,9 +68,13 @@ body {
     margin: 100px 0;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
+    overflow: hidden;
 }
 .messageBody {
+    display: flex;
+    text-align: left;
     width: 100%;
     padding: 15px 9px;
     margin: 0 0 5px 0;
