@@ -85,8 +85,8 @@ function mountMessages () {
 }  
 function mountMessage () {
     let userInput = document.querySelector("textarea").value;
-    if (userInput==""){
-        document.querySelector("textarea").value = "Escreva aqui...";
+    if (userInput=="" || userInput=="Escreva aqui... "){
+        document.querySelector("textarea").value = "Escreva aqui... ";
     } else { 
         let message = {
             from: userName,
@@ -98,7 +98,7 @@ function mountMessage () {
         requisicao.then(foi);
         requisicao.catch(numfoi);
         getMessages();
-        document.querySelector("textarea").value = "Escreva aqui...";
+        document.querySelector("textarea").value = "Escreva aqui... ";
     }
     document.querySelector("textarea").classList.remove("selected");
 }
